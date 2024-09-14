@@ -32,7 +32,7 @@ class HeroesResource(Resource):
 
 class SingleHeroResource(Resource):
     def get(self, id):
-        hero = Hero.query.get(id)
+        hero = db.session.get(Hero, id)
         if hero:
             return hero.to_dict(), 200  # Use the to_dict method to serialize
         return {'error': 'Hero not found'}, 404
@@ -48,7 +48,7 @@ class PowersResource(Resource):
 
 class SinglePowerResource(Resource):
     def get(self, id):
-        power = Power.query.get(id)
+        power = db.session.get(Power, id)
         if power:
             return {
                 'id': power.id,
@@ -58,7 +58,7 @@ class SinglePowerResource(Resource):
         return {'error': 'Power not found'}, 404
 
     def patch(self, id):
-        power = Power.query.get(id)
+        power = db.session.get(Power, id)
         if not power:
             return {'error': 'Power not found'}, 404
 
